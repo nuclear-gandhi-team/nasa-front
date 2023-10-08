@@ -32,15 +32,6 @@ export default function App() {
           }}
         />
         <ParallaxLayer
-          offset={0}
-          speed={-0.2}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        ></ParallaxLayer>
-        <ParallaxLayer
           offset={0.5}
           speed={-0.5}
           style={{
