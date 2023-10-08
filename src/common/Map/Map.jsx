@@ -1,7 +1,7 @@
 import React from 'react';
 import { GoogleMap } from '@react-google-maps/api';
 
-import { LocationMarker } from '../LocationMarker';
+import { LocationMarker } from '../../feature/LocationMarker';
 import { Marker } from '../Marker';
 
 import { defaultTheme } from './Theme';
@@ -26,6 +26,7 @@ const defaultOptions = {
   fullscreenControl: false,
   styles: defaultTheme,
 };
+// eslint-disable-next-line react/prop-types
 const Map = ({ center, marker, onMarkerAdd }) => {
   const mapRef = React.useRef(undefined);
 
@@ -37,12 +38,14 @@ const Map = ({ center, marker, onMarkerAdd }) => {
     mapRef.current = undefined;
   }, []);
 
-  const onClick = React.useCallback(loc => {
-    const lat = loc.latLng.lat();
-    const lng = loc.latLng.lng();
-    console.log({ lat, lng });
-    onMarkerAdd({ lat, lng });
-  }, []);
+  const onClick = React.useCallback(
+    loc => {
+      const lat = loc.latLng.lat();
+      const lng = loc.latLng.lng();
+      onMarkerAdd({ lat, lng });
+    },
+    [onMarkerAdd],
+  );
 
   return (
     <div className={s.container}>
@@ -56,8 +59,13 @@ const Map = ({ center, marker, onMarkerAdd }) => {
         options={defaultOptions}
       >
         <LocationMarker position={center} />
+        {/* eslint-disable-next-line react/prop-types */}
         {marker.map(pos => {
-          return <Marker position={pos} />;
+          return (
+            <div key={pos}>
+              <Marker position={pos} />
+            </div>
+          );
         })}
       </GoogleMap>
     </div>

@@ -5,18 +5,19 @@ import Button, { ButtonSize } from '../common/Button';
 import Input from '../common/Input';
 import Link from '../common/Link';
 import Modal from '../common/Modal';
+import { Coordinates } from '../utils/mapTypes';
 
 export interface EnrollModalProps {
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
-  marker: string | undefined;
+  marker: Coordinates[];
 }
 
 interface UserData {
   username: string;
   email: string;
   password: string;
-  coordinates: string | undefined;
+  coordinates: Coordinates[];
 }
 
 const EnrollModal: FC<EnrollModalProps> = ({

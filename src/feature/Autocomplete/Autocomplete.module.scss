@@ -1,26 +1,22 @@
 .root {
     position: relative;
+    width: 100%;
+    z-index: 1;
 }
 .root * {
     box-sizing: border-box;
 }
-.input {
-    width: 100%;
-    padding: 10px 15px;
-    border: 2px solid rgb(34, 34, 34);
-    font-size: 1rem;
-    font-weight: 700;
-}
-.input:focus {
-    border-color: blue;
-    outline: none;
-}
+
 .suggestions {
     position: absolute;
-    top: 0;
+    top: 10px;
     transform: translateY(39px);
-    background: #FFF;
-    border: 2px solid rgb(34, 34, 34);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     width: 100%;
     z-index:10;
     margin: 0;

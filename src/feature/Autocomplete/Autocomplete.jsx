@@ -1,12 +1,13 @@
-import React from 'react';
+import { useEffect } from 'react';
 import useOnclickOutside from 'react-cool-onclickoutside';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
 
-import s from './Autocomplete.module.css';
+import s from './Autocomplete.module.scss';
 
+// eslint-disable-next-line react/prop-types
 export const Autocomplete = ({ isLoaded, onSelect }) => {
   const {
     ready,
@@ -32,7 +33,6 @@ export const Autocomplete = ({ isLoaded, onSelect }) => {
     () => {
       setValue(description, false);
       clearSuggestions();
-      console.log(description);
 
       getGeocode({ address: description })
         .then(results => {
@@ -63,7 +63,7 @@ export const Autocomplete = ({ isLoaded, onSelect }) => {
       );
     });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLoaded) {
       init();
     }
@@ -73,11 +73,11 @@ export const Autocomplete = ({ isLoaded, onSelect }) => {
     <div className={s.root} ref={ref}>
       <input
         type="text"
-        className={s.input}
+        className="bg-transparent border border-gray-300 text-gray-200 text-sm rounded-lg block w-full p-2.5 hover:ring-gray-200"
         value={value}
         onChange={handleInput}
         disabled={!ready}
-        placeholder="Where are you going?"
+        placeholder="Your location"
       />
       {status === 'OK' && (
         <ul className={s.suggestions}>{renderSuggestions()}</ul>
