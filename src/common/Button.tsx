@@ -8,7 +8,7 @@ export enum ButtonSize {
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  size: ButtonSize;
+  size?: ButtonSize;
   disabled?: boolean;
 }
 
