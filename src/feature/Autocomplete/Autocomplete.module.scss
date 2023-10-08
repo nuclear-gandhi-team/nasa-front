@@ -1,0 +1,33 @@
+.root {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+.root * {
+    box-sizing: border-box;
+}
+
+.suggestions {
+    position: absolute;
+    top: 10px;
+    transform: translateY(39px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    width: 100%;
+    z-index:10;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+.listItem {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+.listItem:hover {
+    background: #efefef;
+}
