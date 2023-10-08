@@ -1,14 +1,17 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax';
 
 import Button, { ButtonSize } from './common/Button';
 import Card from './common/Card';
 import Link from './common/Link';
+import EnrollModal from './feature/EnrollModal';
 import Navbar from './feature/Navbar';
 import { url } from './utils/getUrl';
 
 export default function App() {
+  const [open, setOpen] = useState(false);
   const parallax = useRef<IParallax>(null!);
+  const marker = 'test_marker';
   return (
     <div>
       <Parallax ref={parallax} pages={3}>
@@ -54,7 +57,11 @@ export default function App() {
               <Link>Discover More</Link>
             </div>
             <div>
-              <Button text="Get notified" size={ButtonSize.MEDIUM} />
+              <Button
+                text="Get notified"
+                size={ButtonSize.MEDIUM}
+                onClick={() => setOpen(true)}
+              />
             </div>
           </Navbar>
         </ParallaxLayer>
@@ -85,13 +92,16 @@ export default function App() {
             worldwide.
           </h1>
           <p className="w-1/2 text-gray-400">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Our global forest fire tracking project is of paramount importance.
+            With the rising frequency and severity of wildfires due to climate
+            change and human activities, this initiative empowers individuals
+            and communities worldwide. By offering real-time fire location
+            updates and notifications, we help people make informed decisions,
+            collaborate with authorities, and protect their environment. Since
+            wildfires often cross borders, our global approach ensures efficient
+            resource allocation and timely warnings for a safer, more resilient
+            world. Join us in safeguarding our planet&apos;s forests, wildlife,
+            and communities from this growing threat.
           </p>
         </ParallaxLayer>
         <ParallaxLayer
@@ -107,6 +117,7 @@ export default function App() {
           <img src={url('earth')} style={{ width: '35%' }} alt="earth_planet" />
         </ParallaxLayer>
       </Parallax>
+      <EnrollModal openModal={open} setOpenModal={setOpen} marker={marker} />
     </div>
   );
 }

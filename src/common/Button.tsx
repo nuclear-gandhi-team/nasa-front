@@ -15,7 +15,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: FC<ButtonProps> = ({ text, disabled, size, ...rest }) => {
   return (
     <button
-      className={`${size} inline-block text-sm px-4 py-2 leading-none border rounded text-gray-200 border-gray-200 hover:border-sky-300 hover:text-sky-300 mt-4 lg:mt-0 disabled:border-gray-700 disabled:text-gray-600`}
+      className={`${size} w-full inline-block text-sm px-4 py-2 leading-none border rounded text-gray-200 border-gray-200 hover:border-sky-300 hover:text-sky-300 mt-4 lg:mt-0 disabled:border-gray-700 disabled:text-gray-600`}
       disabled={disabled}
       {...rest}
     >
