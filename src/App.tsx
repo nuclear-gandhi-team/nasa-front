@@ -1,12 +1,10 @@
-import React from "react";
-import { Parallax, ParallaxLayer } from "@react-spring/parallax";
+import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 
-// Little helpers ...
 const url = (name: string, wrap = false) =>
   `${
-    wrap ? "url(" : ""
+    wrap ? 'url(' : ''
   }https://awv3node-homepage.surge.sh/build/assets/${name}.svg${
-    wrap ? ")" : ""
+    wrap ? ')' : ''
   }`;
 
 export default function App() {
@@ -17,34 +15,42 @@ export default function App() {
           offset={0}
           speed={0.2}
           factor={2}
-          style={{ backgroundColor: "#171717" }}
+          style={{ backgroundColor: '#171717' }}
         />
         <ParallaxLayer
           offset={1}
           speed={1}
-          factor={1.5}
-          style={{ backgroundColor: "#87BCDE" }}
+          style={{ backgroundColor: '#87BCDE' }}
         />
         <ParallaxLayer
           offset={0}
           speed={0}
           factor={2}
           style={{
-            backgroundImage: url("stars", true),
-            backgroundSize: "cover",
+            backgroundImage: url('stars', true),
+            backgroundSize: 'cover',
           }}
         />
+        <ParallaxLayer
+          offset={0}
+          speed={-0.2}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        ></ParallaxLayer>
         <ParallaxLayer
           offset={0.5}
           speed={-0.5}
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            pointerEvents: "none",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            pointerEvents: 'none',
           }}
         >
-          <img src={url("earth")} style={{ width: "35%" }} alt="govno" />
+          <img src={url('earth')} style={{ width: '35%' }} alt="earth_planet" />
         </ParallaxLayer>
       </Parallax>
     </div>
