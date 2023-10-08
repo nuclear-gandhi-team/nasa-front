@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
+import { useJsApiLoader } from '@react-google-maps/api';
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax';
 
 import Button, { ButtonSize } from './common/Button';
@@ -8,11 +9,40 @@ import EnrollModal from './feature/EnrollModal';
 import Footer from './feature/Footer';
 import MainPageStyles from './feature/MainPageStyles';
 import Navbar from './feature/Navbar';
+import { Autocomplete } from './MapFeatures/Autocomplete';
+import { Map } from './MapFeatures/Map';
+const API_KEY: string = process.env.REACT_APP_API_KEY || '';
+const defaultCenter = {
+  lat: 50.450001,
+  lng: 30.523333,
+};
+const libraries = ['places'];
 
 export default function App() {
   const [open, setOpen] = useState(false);
   const parallax = useRef<IParallax>(null!);
-  const marker = 'test_marker';
+  // const marker = 'test_marker';
+
+  const [center, setCenter] = useState(defaultCenter);
+  const [marker, setMarker] = useState([]);
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script-1',
+    googleMapsApiKey: API_KEY,
+    libraries,
+  });
+
+  const onPlaceSelect = useCallback(coordinates => {
+    setCenter(coordinates);
+  }, []);
+
+  const onMarkerAdd = useCallback(
+    coordinates => {
+      setMarker([...marker, coordinates]);
+    },
+    [marker],
+  );
+
   return (
     <div>
       <Parallax ref={parallax} pages={3}>
@@ -119,7 +149,26 @@ export default function App() {
             flexDirection: 'column',
           }}
         >
-          <Card title="Map"></Card>
+          <Card title="Map">
+            <div
+              style={{
+                width: '100%',
+                maxWidth: '30vw',
+                position: 'fixed',
+                top: '20px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                zIndex: '1',
+              }}
+            >
+              <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect} />
+            </div>
+            {isLoaded ? (
+              <Map center={center} marker={marker} onMarkerAdd={onMarkerAdd} />
+            ) : (
+              <h2>Loading</h2>
+            )}
+          </Card>
         </ParallaxLayer>
 
         {/*Footer*/}
